@@ -1,0 +1,24 @@
+.cal__main {
+    border: black 1px solid;
+    width: 200px;
+    padding: 10px;
+}
+
+.cal__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header__btn button {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    outline: none;
+}
+
+.days td {
+    background: rgba(194, 188, 188, 0.993);
+    margin: 0;
+    padding: 4px;
+}
