@@ -22,3 +22,14 @@
     margin: 0;
     padding: 4px;
 }
+
+.base-td:hover {
+    background: black;
+    color: white;
+    transition: linear .3s;
+    cursor: pointer;
+}
+
+.tasks {
+    display: none;
+}

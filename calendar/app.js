@@ -69,6 +69,8 @@ function createStandartWeek(start, tr, iter = 7, end) {
         
 
         let td = document.createElement('td');
+
+        td.classList.add('base-td');
             
         td.innerHTML = i;
         td.style.cssText = 'width: 20px; text-align: center;';
@@ -141,6 +143,7 @@ function next() {
     createDate(currentYear, currentMonth, mainTable);
     displaySelectData(currentYear, currentMonth);
     selectCurrentDate(currentYear, currentMonth);
+    selectDateWithTasks(tasks);
 }
 
 function prev() {
@@ -157,6 +160,7 @@ function prev() {
     createDate(currentYear, currentMonth, mainTable);
     displaySelectData(currentYear, currentMonth);
     selectCurrentDate(currentYear, currentMonth);
+    selectDateWithTasks(tasks);
 }
 
 //Дополнительные функции вычисления дней недели и тд ======================================
@@ -177,3 +181,71 @@ getCalandar();
 
 pvBtn.addEventListener('click', prev);
 nxBtn.addEventListener('click', next);
+
+// Функция органайзера ====================================================================
+
+const tasks = {
+    '2020.4.24': [
+        'Доделать календарь',
+        'Протестировать органайзер',
+        'Сделать коммит' 
+    ],
+
+    '2020.4.28': [
+        'Проверить задачи',
+        'Сделать задачи',
+    ],
+
+    '2020.5.20': [
+        'Проверить почту',
+        'Ответить письма',
+        'Сделать проверку репозитория' 
+    ],
+
+    '2020.6.21': [
+        'Отдохнуть',
+        'Перебрать код',
+        'Сделать коммит' 
+    ],
+},
+    textareaForTask = document.querySelector('.tasks');
+
+// Основная функция которая запускает перебор задач и отмечает активные дни в календаре, запускает подфункции
+
+function selectDateWithTasks(tasks) {
+    let keys = Object.keys(tasks);
+
+    for(let i = 0; i < keys.length; i++) {
+        let arrDate = keys[i].split('.');
+            testYear = arrDate[0],
+            testMonth = arrDate[1],
+            testDay = arrDate[2];
+
+        if(testYear == currentYear && testMonth == currentMonth) {
+            let days = document.querySelectorAll('.generate-dates td');
+
+            for(j = 0; j < days.length; j++) {
+                if(j == testDay) {
+                    days[j].style.border = 'grey 1px solid';
+
+                    days[j].addEventListener('click', function() {
+                        displayTaskList(tasks[keys[i]]);
+                    });
+                }
+            }
+        }
+    }
+}
+
+// Подфункция события нажатия по дня с задачей, отображает ниже список с задачами и добавляет их в блок
+
+function displayTaskList(task) {
+    textareaForTask.value = '';
+    textareaForTask.style.display = 'block';
+
+    for(let i = 0; i < task.length; i++) {
+        textareaForTask.value += `${task[i]} \n`;
+    }
+}
+
+selectDateWithTasks(tasks);
