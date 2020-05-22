@@ -71,6 +71,7 @@ function createStandartWeek(start, tr, iter = 7, end) {
         let td = document.createElement('td');
 
         td.classList.add('base-td');
+        td.addEventListener('click', clickOnDate);
             
         td.innerHTML = i;
         td.style.cssText = 'width: 20px; text-align: center;';
@@ -175,9 +176,7 @@ function getCountWeeks(year, month) {
   return Math.ceil( (l.getDate() - (l.getDay()?l.getDay():7))/7 ) + 1;
  }
 
-// Первая генерация текущего месяца и события на кнопки======================================
-
-getCalandar();
+// Cобытия на кнопок управления вперед и назад ======================================
 
 pvBtn.addEventListener('click', prev);
 nxBtn.addEventListener('click', next);
@@ -208,7 +207,10 @@ const tasks = {
         'Сделать коммит' 
     ],
 },
-    textareaForTask = document.querySelector('.tasks');
+    textareaForTask = document.querySelector('.tasks'),
+    addTaskBtn = document.querySelector('.task__add');
+
+let selectDay = '';
 
 // Основная функция которая запускает перебор задач и отмечает активные дни в календаре, запускает подфункции
 
@@ -225,7 +227,7 @@ function selectDateWithTasks(tasks) {
             let days = document.querySelectorAll('.generate-dates td');
 
             for(j = 0; j < days.length; j++) {
-                if(j == testDay) {
+                if(days[j].innerHTML == testDay) {
                     days[j].style.border = 'grey 1px solid';
 
                     days[j].addEventListener('click', function() {
@@ -237,7 +239,7 @@ function selectDateWithTasks(tasks) {
     }
 }
 
-// Подфункция события нажатия по дня с задачей, отображает ниже список с задачами и добавляет их в блок
+// Подфункция события нажатия по дню с задачей, отображает ниже список с задачами и добавляет их в блок
 
 function displayTaskList(task) {
     textareaForTask.value = '';
@@ -248,4 +250,41 @@ function displayTaskList(task) {
     }
 }
 
+// Событие клика по любой ячейки с датой; Очищает задачи; Очищает предыдущее выделение; Прогоняет проверку дат с задачи;
+// Ставит новое выделение на активной дате, которая сейчас выбрана;
+
+function clickOnDate() {
+    let days = document.querySelectorAll('.generate-dates td');
+
+    addTaskBtn.style.display = 'block';
+    textareaForTask.style.display = 'block';
+    textareaForTask.value = '';
+    selectDay = this;
+    
+    for(let i = 0; i < days.length; i++) {
+    
+        if(days[i].style.border == '1px solid orange') {
+            days[i].style.border = 'none';
+        }
+    }
+
+    selectDateWithTasks(tasks);
+
+    this.style.border = 'orange 1px solid';
+}
+
+// Событие клика по кнопка добавления задачи и функция добавления =====================================
+
+addTaskBtn.addEventListener('click', addTaskToObject);
+
+function addTaskToObject() {
+    let genDate = `${currentYear}.${currentMonth}.${selectDay.innerHTML}`,
+        genArr = textareaForTask.value.split('\n');
+
+    tasks[genDate] = genArr;
+    
+    selectDateWithTasks(tasks);
+}
+
+getCalandar();
 selectDateWithTasks(tasks);

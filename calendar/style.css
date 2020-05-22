@@ -33,3 +33,7 @@
 .tasks {
     display: none;
 }
+
+.task__add {
+    display: none;
+}
