@@ -89,9 +89,9 @@ function checkWinner() {
                 ifWinner = true;
                 return plusForUser(cells[winnerArr[i][0]].innerHTML);
             }
-        else if(ifWinner == false){
-            checkFish(cells); // определить ничью;
-        }
+    }
+    if(ifWinner == false){
+        checkFish(cells); // определить ничью;
     }
 }
 
@@ -146,6 +146,8 @@ function reset() {
 
         cells[i].addEventListener('click', clickOnTd);
     }
+    ifWinner = false;
+    displayUser(user);
 }
 
 buttonReset.addEventListener('click', reset);
