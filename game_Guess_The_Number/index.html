@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess The Number</title>
+</head>
+<body>
+    <div class="container" style='margin: 25vh auto; width: 750px; padding: 25px; border: dashed 2px grey; border-radius: 20px;'>
+        <h2>The PC generate randome number from 1 to 100. Guess this number.</h2>
+        <p>You Have only <b>30 seconds</b>!!!</p>
+        <hr>
+        <p style="color: red;"><span class="timer">30</span> sec</p>
+        <br>
+        <br>
+        <input type="text" class="i-num" style="width: 260px; border-radius: 3px; height: 20px;" placeholder="Specify number and push ENTER for Start">
+        <span class="tips" style="margin-left: 20px; color: red; font-weight: 700;"></span>
+        <br><br><br><br>
+        <button class="rest-btn" style="width: 100px; height: 25px;" disabled>RESET</button>
+    </div>
+    <script src="./app.js"></script>
+</body>
+</html>
