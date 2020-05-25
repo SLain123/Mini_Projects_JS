@@ -1,0 +1,59 @@
+.container {
+    width: 1000px;
+    margin: 15px auto;
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.title {
+    text-align: center;
+    font-size: 36px;
+    letter-spacing: 5px;
+    font-style: italic;
+}
+
+.subtitle {
+    letter-spacing: 1px;
+}
+
+.timer-par {
+    text-align: center;
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+.game-block {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+}
+
+.result-game {
+    position: absolute;
+    top: 100%;
+}
+
+.main-table {
+    border-collapse: collapse;
+}
+
+.reset-btn {
+    height: 50px;
+    width: 200px;
+    margin: auto;
+}
+
+.result-table {
+    border: 3px black double;
+    padding: 20px;
+}
+
+.red {
+    color: red;
+}
+
+.blue {
+    color: blue;
+}
+

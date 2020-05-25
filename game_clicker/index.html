@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Clicker</title>
+</head>
+<body>
+    <div class="container">
+        <h2 class="title">Clicker</h2>
+        <h3 class="subtitle">You need click on numbers from 1 to <span class="finish-num red"></span></h3>
+        <p>You have only 60 second per round. After win level will up and difficulty of round will <span class="red">BOOST</span>! Start after <span class="red">FIRST</span> click.</p>
+        <p>If you are win you get time <span class="blue">BONUS.</span> See panel Results.</p>
+        <br><br>
+        <p class="timer-par">The time will end in <span class="timer">60</span> seconds.</p>
+        <div class="game-block">
+            <table class="main-table"></table>
+            <p class="result-game"></p>
+            <button class="reset-btn" disabled>If you are lose RESET GAME</button>
+            <div class="result-table">
+                <h3>Results:</h3>
+                <p>Current level: &nbsp; &nbsp; &nbsp;<span class="level">0</span></p>
+                <p>You time bonus: &nbsp;<span class="bonus">0</span> secs</p>
+                <p>Current record: &nbsp;&nbsp; <span class="record">0</span></p>
+            </div>
+        </div>
+    </div>
+    <script src="./app.js"></script>
+</body>
+</html>
