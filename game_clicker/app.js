@@ -140,7 +140,13 @@ function loseGame() {
     resetBtn.removeAttribute('disabled', '');
     level.innerHTML = 0;
     bonusText.innerHTML = 0;
-    recordText.innerHTML = 0;
+    record = 0;
+    bonus = 0;
+
+    timerText.innerHTML = 60;
+
+    row = 5;
+    column = 5;
 }
 
 // If game WIN=============================================================
@@ -208,6 +214,6 @@ function countBonus() {
 }
 
 function countRecord() {
-    record = Number(recordText.innerHTML) + 1;
+    record++;
     recordText.innerHTML = record;
 }
