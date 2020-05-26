@@ -1,0 +1,54 @@
+.container {
+    width: 400px;
+    margin: 20px auto;
+}
+
+.i-main {
+    width: 385px;
+}
+
+.i-border {
+    background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+    border: black 1px solid; padding: 5px;
+}
+
+.block-task {
+    border: 1px solid black; 
+    display: flex;
+    height: 50px;
+    border-top: transparent 1px solid;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(90deg, rgba(252,176,69,1) 0%, rgba(253,29,29,1) 50%, rgba(131,58,180,1) 100%);
+    color: white;
+}
+
+.checkbox {
+    margin-left: 10px;
+}
+
+.task-text {
+    width: 80%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.input-for-edit {
+    width: 80%;
+}
+
+.remove-btn {
+    width: 30px; 
+    height: 30px; 
+    border: red 1px solid; 
+    border-radius: 5px; 
+    color: red;
+    background: transparent; 
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+    padding-top: 3px;
+    margin-right: 10px;
+    background: white;
+    opacity: .7;
+}
