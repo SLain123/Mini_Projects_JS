@@ -34,6 +34,9 @@
     display: none;
 }
 
-.task__add {
+.task-btn {
     display: none;
+    width: 210px;
+    margin: 5px;
+    height: 40px;
 }

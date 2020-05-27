@@ -184,35 +184,49 @@ nxBtn.addEventListener('click', next);
 // Функция органайзера ====================================================================
 
 const tasks = {
-    '2020.4.24': [
-        'Доделать календарь',
-        'Протестировать органайзер',
-        'Сделать коммит' 
-    ],
+                '2020.4.24': { 
+                                'task': [
+                                    'Доделать календарь',
+                                    'Протестировать органайзер',
+                                    'Сделать коммит' 
+                                    ],
+                                'status': true
+                            },
 
-    '2020.4.28': [
-        'Проверить задачи',
-        'Сделать задачи',
-    ],
+                '2020.4.28': {
+                                'task': [
+                                    'Проверить задачи',
+                                    'Сделать задачи',
+                                    ],
+                                'status': true
+                            },
 
-    '2020.5.20': [
-        'Проверить почту',
-        'Ответить письма',
-        'Сделать проверку репозитория' 
-    ],
+                '2020.5.20': {
+                                'task': [
+                                    'Проверить почту',
+                                    'Ответить письма',
+                                    'Сделать проверку репозитория' 
+                                    ],
+                                'status': true
+                            },
 
-    '2020.6.21': [
-        'Отдохнуть',
-        'Перебрать код',
-        'Сделать коммит' 
-    ],
+                '2020.6.21': {
+                                'task': [
+                                    'Отдохнуть',
+                                    'Перебрать код',
+                                    'Сделать коммит' 
+                                    ],
+                                'status': true
+                            }
 },
     textareaForTask = document.querySelector('.tasks'),
-    addTaskBtn = document.querySelector('.task__add');
+    addTaskBtn = document.querySelector('.task__add'),
+    doneTaskBtn = document.querySelector('.task__done'),
+    removeTaskBtn = document.querySelector('.task__remove');
 
 let selectDay = '';
 
-// Основная функция которая запускает перебор задач и отмечает активные дни в календаре, запускает подфункции
+// Основная функция которая запускает перебор задач
 
 function selectDateWithTasks(tasks) {
     let keys = Object.keys(tasks);
@@ -228,11 +242,13 @@ function selectDateWithTasks(tasks) {
 
             for(j = 0; j < days.length; j++) {
                 if(days[j].innerHTML == testDay) {
-                    days[j].style.border = 'grey 1px solid';
 
+                    days[j].style.border = 'red 1px solid';
+                    
                     days[j].addEventListener('click', function() {
                         displayTaskList(tasks[keys[i]]);
                     });
+                    
                 }
             }
         }
@@ -245,9 +261,14 @@ function displayTaskList(task) {
     textareaForTask.value = '';
     textareaForTask.style.display = 'block';
 
-    for(let i = 0; i < task.length; i++) {
-        textareaForTask.value += `${task[i]} \n`;
+    for(let i = 0; i < task['task'].length; i++) {
+        textareaForTask.value += `${task['task'][i]} \n`;
     }
+
+    if(task['status']) {
+        textareaForTask.style.textDecoration = 'none';
+    }
+    else textareaForTask.style.textDecoration = 'line-through';
 }
 
 // Событие клика по любой ячейки с датой; Очищает задачи; Очищает предыдущее выделение; Прогоняет проверку дат с задачи;
@@ -257,34 +278,55 @@ function clickOnDate() {
     let days = document.querySelectorAll('.generate-dates td');
 
     addTaskBtn.style.display = 'block';
+    doneTaskBtn.style.display = 'block';
+    removeTaskBtn.style.display = 'block';
+
     textareaForTask.style.display = 'block';
     textareaForTask.value = '';
     selectDay = this;
     
     for(let i = 0; i < days.length; i++) {
     
-        if(days[i].style.border == '1px solid orange') {
+        if(days[i].style.border == '1px solid blue') {
             days[i].style.border = 'none';
         }
     }
 
     selectDateWithTasks(tasks);
 
-    this.style.border = 'orange 1px solid';
+    this.style.border = 'blue 1px solid';
 }
 
-// Событие клика по кнопка добавления задачи и функция добавления =====================================
+// Событие клика по кнопке добавления задачи и функция добавления =====================================
 
 addTaskBtn.addEventListener('click', addTaskToObject);
 
 function addTaskToObject() {
-    let genDate = `${currentYear}.${currentMonth}.${selectDay.innerHTML}`,
-        genArr = textareaForTask.value.split('\n');
+    let generateSelectDate = `${currentYear}.${currentMonth}.${selectDay.innerHTML}`,
+        arrWithTasksAdd = textareaForTask.value.split('\n'),
+        objectWithTask = {task: arrWithTasksAdd,
+                        status: true}
 
-    tasks[genDate] = genArr;
+    tasks[generateSelectDate] = objectWithTask;
     
     selectDateWithTasks(tasks);
 }
+
+// Событие клика по кнопке задача выполнена и функция перечеркивания ==================================
+
+doneTaskBtn.addEventListener('click', doneTask);
+
+function doneTask() {
+    let generateSelectDate = `${currentYear}.${currentMonth}.${selectDay.innerHTML}`;
+
+    tasks[generateSelectDate]['status'] = false;
+
+    textareaForTask.style.textDecoration = 'line-through';
+
+    selectDateWithTasks(tasks);
+}
+
+// Первый старт, формирование начального месяца=====================================================
 
 getCalandar();
 selectDateWithTasks(tasks);
