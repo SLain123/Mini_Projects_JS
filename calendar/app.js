@@ -242,13 +242,15 @@ function selectDateWithTasks(tasks) {
 
             for(j = 0; j < days.length; j++) {
                 if(days[j].innerHTML == testDay) {
-
-                    days[j].style.border = 'red 1px solid';
+                    
+                    if(days[j].hasAttribute('data-status', 'doneTask')) {
+                        days[j].style.border = 'gray 1px solid';
+                    }
+                    else days[j].style.border = 'red 1px solid';
                     
                     days[j].addEventListener('click', function() {
                         displayTaskList(tasks[keys[i]]);
-                    });
-                    
+                    });   
                 }
             }
         }
@@ -261,14 +263,16 @@ function displayTaskList(task) {
     textareaForTask.value = '';
     textareaForTask.style.display = 'block';
 
-    for(let i = 0; i < task['task'].length; i++) {
-        textareaForTask.value += `${task['task'][i]} \n`;
+    if(task != undefined) {
+        for(let i = 0; i < task['task'].length; i++) {
+            textareaForTask.value += `${task['task'][i]} \n`;
+        }
+    
+        if(task['status']) {
+            textareaForTask.style.textDecoration = 'none';
+        }
+        else textareaForTask.style.textDecoration = 'line-through';
     }
-
-    if(task['status']) {
-        textareaForTask.style.textDecoration = 'none';
-    }
-    else textareaForTask.style.textDecoration = 'line-through';
 }
 
 // Событие клика по любой ячейки с датой; Очищает задачи; Очищает предыдущее выделение; Прогоняет проверку дат с задачи;
@@ -282,6 +286,7 @@ function clickOnDate() {
     removeTaskBtn.style.display = 'block';
 
     textareaForTask.style.display = 'block';
+    textareaForTask.style.textDecoration = 'none';
     textareaForTask.value = '';
     selectDay = this;
     
@@ -318,11 +323,29 @@ doneTaskBtn.addEventListener('click', doneTask);
 
 function doneTask() {
     let generateSelectDate = `${currentYear}.${currentMonth}.${selectDay.innerHTML}`;
+    
+    if(tasks[generateSelectDate] == undefined) {
+        alert('Задач в этот день не запланированно!');
+    }
+    else {
+        tasks[generateSelectDate]['status'] = false;
+        textareaForTask.style.textDecoration = 'line-through';
+        selectDay.setAttribute('data-status', 'doneTask');
 
-    tasks[generateSelectDate]['status'] = false;
+        selectDateWithTasks(tasks);
+    }
+}
 
-    textareaForTask.style.textDecoration = 'line-through';
+// Событие клика на кнопке удалить задачу и функция удаления задачи из объекта tasks=================
 
+removeTaskBtn.addEventListener('click', removeTask);
+
+function removeTask() {
+    let generateSelectDate = `${currentYear}.${currentMonth}.${selectDay.innerHTML}`;
+    
+    textareaForTask.value = '';
+    delete tasks[generateSelectDate];
+    
     selectDateWithTasks(tasks);
 }
 
