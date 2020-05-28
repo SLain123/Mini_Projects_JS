@@ -242,13 +242,15 @@ function selectDateWithTasks(tasks) {
 
             for(j = 0; j < days.length; j++) {
                 if(days[j].innerHTML == testDay) {
+
+                    checkDone(days[j], keys[i]);  // подфункция которая проверяет статус задачи выполнена\нет и расставляет атрибут data-status, нужна как доп. после формирования месяца;
                     
-                    if(days[j].hasAttribute('data-status', 'doneTask')) {
+                    if(days[j].hasAttribute('data-status', 'doneTask')) {  // Проверка атрибута data-status, размечает уже выполенные задачи
                         days[j].style.border = 'gray 1px solid';
                     }
-                    else days[j].style.border = 'red 1px solid';
+                    else days[j].style.border = 'red 1px solid'; // если статуса нет, то отмечает задачу как активную
                     
-                    days[j].addEventListener('click', function() {
+                    days[j].addEventListener('click', function() {  // навешивает событие которое отображает список задач по клике на дату
                         displayTaskList(tasks[keys[i]]);
                     });   
                 }
@@ -302,17 +304,28 @@ function clickOnDate() {
     this.style.border = 'blue 1px solid';
 }
 
+// Подфункция дополнительной проверки выполненных задач ==============================================
+
+function checkDone(td, task) {
+    if(tasks[task]['status'] == false) {
+        td.setAttribute('data-status', 'doneTask');
+    }
+}
+
 // Событие клика по кнопке добавления задачи и функция добавления =====================================
 
 addTaskBtn.addEventListener('click', addTaskToObject);
 
 function addTaskToObject() {
-    let generateSelectDate = `${currentYear}.${currentMonth}.${selectDay.innerHTML}`,
+    if(textareaForTask.value != '') {
+        let generateSelectDate = `${currentYear}.${currentMonth}.${selectDay.innerHTML}`,
         arrWithTasksAdd = textareaForTask.value.split('\n'),
         objectWithTask = {task: arrWithTasksAdd,
-                        status: true}
+                        status: true};
 
     tasks[generateSelectDate] = objectWithTask;
+    }
+    else alert('Поле с задачами не заполнено, укажите список задач.');
     
     selectDateWithTasks(tasks);
 }
@@ -353,3 +366,21 @@ function removeTask() {
 
 getCalandar();
 selectDateWithTasks(tasks);
+
+// ===================================Помощь=======================================================
+
+const helpBtn = document.querySelector('.help-btn'),
+    helpCloseBtn = document.querySelector('.cls-modal-btn'),
+    modalWindowHelp = document.querySelector('.modal-help');
+
+helpBtn.addEventListener('click', getHelp);
+
+function getHelp() {
+    modalWindowHelp.style.display = 'block';
+}
+
+helpCloseBtn.addEventListener('click', hideHelp);
+
+function hideHelp() {
+    modalWindowHelp.style.display = 'none';
+}

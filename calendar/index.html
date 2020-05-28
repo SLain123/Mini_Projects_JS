@@ -8,6 +8,7 @@
 </head>
 <body>
     <div class="calendar cal__main">
+        <button class="help help-btn">Помощь</button>
         <div class="cal__header">
             <p class="header__date">123</p>
             <div class="header__btn"> 
@@ -31,6 +32,14 @@
     <button class="task__add task-btn">Добавить задачи на день</button>
     <button class="task__done task-btn">Все дневные задачи завершены</button>
     <button class="task__remove task-btn">Удалить все задачи за день</button>
+
+    <div class="modal-help">
+        <p><span style="border: blue 1px solid; padding: 2px 5px;">25</span> - выбранная дата на текущий момент (select)</p>
+        <p><span style="border: red 1px solid; padding: 2px 5px;">25</span> - дата на которую запланирован список задач</p>
+        <p><span style="border: grey 1px solid; padding: 2px 5px;">25</span> - дата список задач которой полностью выполнен</p>
+        <p><span style="padding: 2px 5px; background: black; color: white;">25</span> - текущий день недели</p>
+        <button class="help cls-modal-btn">&times;</button>
+    </div>
     <script src="./app.js"></script>
 </body>
 </html>

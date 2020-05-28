@@ -2,6 +2,18 @@
     border: black 1px solid;
     width: 200px;
     padding: 10px;
+    position: relative;
+}
+
+.help {
+    width: 65px;
+    height: 18px;
+    font-size: 10px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: transparent 1px solid;
+    cursor: pointer;
 }
 
 .cal__header {
@@ -24,7 +36,7 @@
 }
 
 .base-td:hover {
-    background: black;
+    background: rgba(39, 37, 37, 0.692);
     color: white;
     transition: linear .3s;
     cursor: pointer;
@@ -39,4 +51,29 @@
     width: 210px;
     margin: 5px;
     height: 40px;
+}
+
+.modal-help {
+    position: relative;
+    width: 350px;
+    height: 190px;
+    display: fixed;
+    position: absolute;
+    top: 10px;
+    left: 250px;
+    border: black 1px solid;
+    padding: 10px;
+    font-size: 14px;
+    display: none;
+}
+
+.modal-help p {
+    margin-bottom: 25px;
+}
+
+.cls-modal-btn {
+    width: 30px;
+    height: 25px;
+    font-weight: 700;
+    font-size: 16px;
 }
