@@ -1,0 +1,86 @@
+body {
+    overflow: hidden;
+}
+
+.game {
+    width: 1300px;
+    margin: 5px auto;
+    display: flex;
+    flex-flow: column;
+    position: relative;
+}
+
+.score {
+    font-size: 26px;
+    font-weight: 700;
+    text-align: center;
+    color: white;
+    margin: 0;
+    padding: 12px;
+    border: rgba(79, 89, 70, .1) 5px solid;
+    background: linear-gradient(18deg, rgba(79,89,70,1) 0%, rgba(84,149,61,1) 25%, rgba(79,89,70,1) 50%, rgba(84,149,61,1) 75%, rgba(79,89,70,1) 100%);;
+}
+
+.area {
+    text-align: center;
+    font-size: 6.5em;
+    color: white;
+    letter-spacing: -7px;
+    font-weight: 700;
+    text-transform: uppercase;
+    animation: blur 1.5s ease-out infinite alternate;
+    text-shadow: 0px 0px 5px rgb(94, 1, 1), 0px 0px 7px rgb(94, 1, 1);
+    position: absolute;
+    top: 45%;
+    left: 30%;
+    display: none;
+    flex-flow: column;
+  }
+
+.reset-btn {
+    height: 80px;
+    font-size: 22px;
+    background: transparent;
+    color: rgb(94, 1, 1);
+    font-weight: 700;
+    letter-spacing: 3px;
+    outline: none;
+    border: rgb(94, 1, 1) 2px solid;
+    text-shadow: 8px 8px 10px white, -8px 8px 10px white, 8px -8px 10px white, -8px -8px 10px white;
+    margin-top: 25px;
+    cursor: pointer;
+    transition: all linear .8s;
+    border-radius: 3px;
+}
+
+.reset-btn:hover {
+    font-size: 25px;
+    background: rgb(49, 47, 47);
+    color: white;
+    text-shadow: 4px 4px 10px red, -4px 4px 10px red, 4px -4px 10px red, -4px -4px 10px red;
+    border: none;
+    box-shadow: 8px 8px 25px red, -8px 8px 25px red, 8px -8px 25px red, -8px -8px 25px red;
+}
+  
+  @keyframes blur {
+    from {
+      text-shadow:0px 0px 10px rgb(94, 1, 1),
+        0px 0px 10px rgb(94, 1, 1), 
+        0px 0px 25px rgb(94, 1, 1),
+        0px 0px 25px rgb(94, 1, 1),
+        0px 0px 25px rgb(94, 1, 1),
+        0px 0px 25px rgb(94, 1, 1),
+        0px 0px 25px rgb(94, 1, 1),
+        0px 0px 25px rgb(94, 1, 1),
+        0px 0px 50px rgb(94, 1, 1),
+        0px 0px 50px rgb(94, 1, 1),
+        0px 0px 50px rgb(231, 45, 20),
+        0px 0px 150px rgb(231, 45, 20),
+        0px 40px 100px rgb(231, 45, 20),
+        0px 40px 100px rgb(231, 45, 20),
+        0px 40px 100px rgb(231, 45, 20),
+        0px 40px 100px rgb(231, 45, 20),
+        0px -40px 100px rgb(231, 45, 20),
+        0px -40px 100px rgb(231, 45, 20);
+    }
+  }
